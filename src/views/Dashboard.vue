@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <h1 class="title grey--text">Dashboard</h1>
-    <v-container>
+    <v-container class="my-5">
       <v-card
         flat
         class="px-2"
