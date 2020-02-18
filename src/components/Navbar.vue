@@ -1,0 +1,56 @@
+<template>
+  <nav>
+    <v-app-bar flat app>
+      <v-app-bar-nav-icon
+        class="grey--text"
+        @click="drawerOpen = !drawerOpen"
+      ></v-app-bar-nav-icon>
+      <v-toolbar-title class="text-uppercase grey--text">
+        <span>Denny</span>
+        <span class="font-weight-light">Todo</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text class="grey--text">
+        <span>Signout</span>
+        <v-icon right>mdi-exit-to-app</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <!-- App needs to be included for the drawer to -->
+    <v-navigation-drawer v-model="drawerOpen" app class="primary">
+      <v-list>
+        <!-- router prop  -->
+        <v-list-item
+          v-for="link in links"
+          :key="link.text"
+          router
+          :to="link.route"
+          flat
+        >
+          <v-list-item-icon>
+            <v-icon class="white--text">{{ link.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="white--text">{{
+              link.text
+            }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: 'Navbar',
+  data: () => ({
+    drawerOpen: false,
+    links: [
+      { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
+      { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
+      { icon: 'mdi-account', text: 'Team', route: '/team' }
+    ]
+  })
+  // methods: ()
+};
+</script>
