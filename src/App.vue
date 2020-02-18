@@ -1,9 +1,9 @@
 <template>
   <v-app>
+    <Navbar />
     <div class="grey lighten-4">
       <!-- Put header here -->
-      <Navbar />
-      <v-content>
+      <v-content class="mx-5 mb-4">
         <router-view></router-view>
       </v-content>
       <!-- Put footer here -->
