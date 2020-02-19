@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Navbar />
-    <div class="grey lighten-4">
+    <div class="grey lighten-4" style="height:100vh">
       <!-- Put header here -->
       <v-content class="mx-5 mb-4">
         <router-view></router-view>
