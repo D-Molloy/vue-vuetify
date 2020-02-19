@@ -10,17 +10,17 @@
               <span class="grey--text caption text-lowercase">Order By Project</span>
             </v-btn>
           </template>
-            <span>Sort the projects by name</span>
+          <span>Sort the projects by name</span>
         </v-tooltip>
 
-          <v-tooltip top>
+        <v-tooltip top>
           <template v-slot:activator="{ on }">
-        <v-btn small outlined color="grey" v-on="on" @click="sortBy('person')">
-          <v-icon left small color="grey">mdi-account-group</v-icon>
-          <span class="grey--text caption text-lowercase">Order By Person</span>
-        </v-btn>
-                  </template>
-            <span>Order projects by first name</span>
+            <v-btn small outlined color="grey" v-on="on" @click="sortBy('person')">
+              <v-icon left small color="grey">mdi-account-group</v-icon>
+              <span class="grey--text caption text-lowercase">Order By Person</span>
+            </v-btn>
+          </template>
+          <span>Order projects by first name</span>
         </v-tooltip>
       </v-row>
       <v-card flat class="px-2" v-for="project in projects" :key="project.title">
