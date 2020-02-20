@@ -8,29 +8,26 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- dropdown menu -->
-      <v-menu>
-      <template v-slot:activator="{ on: menu }">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on: tooltip }">
-            <v-btn
-              color="primary"
-              dark
-              v-on="{ ...tooltip, ...menu }"
-            >Dropdown w/ Tooltip</v-btn>
-          </template>
-          <span>Im A ToolTip</span>
-        </v-tooltip>
-      </template>
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click=""
-        >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on: menu }">
+          <v-btn color="grey" outlined v-on="{ ...tooltip, ...menu }">
+            <v-icon color="grey" left>mdi-menu-swap-outline</v-icon>
+            <span>Menu</span>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="(link, index) in links" :key="index" router :to="link.route">
+            <v-list-item-content>
+              <v-list-item-title class="grey--text">
+                {{
+                link.text
+                }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      <!-- dropdown menu -->
       <v-btn text class="grey--text">
         <span>Signout</span>
         <v-icon right>mdi-exit-to-app</v-icon>
@@ -72,6 +69,12 @@ export default {
       { icon: "mdi-view-dashboard", text: "Dashboard", route: "/" },
       { icon: "mdi-folder", text: "My Projects", route: "/projects" },
       { icon: "mdi-account", text: "Team", route: "/team" }
+    ],
+    items: [
+      { title: "Click Me1" },
+      { title: "Click Me2" },
+      { title: "Click Me3" },
+      { title: "Click Me4" }
     ]
   })
   // methods: ()
