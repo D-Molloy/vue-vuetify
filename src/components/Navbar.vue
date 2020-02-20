@@ -7,12 +7,36 @@
         <span class="font-weight-light">Todo</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <!-- dropdown menu -->
+      <v-menu>
+      <template v-slot:activator="{ on: menu }">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on: tooltip }">
+            <v-btn
+              color="primary"
+              dark
+              v-on="{ ...tooltip, ...menu }"
+            >Dropdown w/ Tooltip</v-btn>
+          </template>
+          <span>Im A ToolTip</span>
+        </v-tooltip>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          @click=""
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
       <v-btn text class="grey--text">
         <span>Signout</span>
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
     </v-app-bar>
-    <!-- App needs to be included for the drawer to -->
+    <!-- App needs to be included for theprojec drawer to -->
     <v-navigation-drawer v-model="drawerOpen" app class="primary">
       <v-col cols="12" class="d-flex flex-column align-center mt-5">
         <v-avatar size="100" class="grey lighten-2">
