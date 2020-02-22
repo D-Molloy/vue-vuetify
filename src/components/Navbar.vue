@@ -10,7 +10,7 @@
       <!-- dropdown menu -->
       <v-menu offset-y>
         <template v-slot:activator="{ on: menu }">
-          <v-btn color="grey" outlined v-on="{ ...tooltip, ...menu }">
+          <v-btn color="grey" outlined v-on="{...menu }">
             <v-icon color="grey" left>mdi-menu-swap-outline</v-icon>
             <span>Menu</span>
           </v-btn>
@@ -41,6 +41,9 @@
         </v-avatar>
         <p class="white--text subtitle-1">The Net Ninja</p>
       </v-col>
+      <v-col >
+      <Popup/>
+      </v-col>
       <v-list>
         <!-- router prop  -->
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route" flat>
@@ -61,6 +64,8 @@
 </template>
 
 <script>
+import Popup from "./Popup"
+
 export default {
   name: "Navbar",
   data: () => ({
@@ -76,7 +81,8 @@ export default {
       { title: "Click Me3" },
       { title: "Click Me4" }
     ]
-  })
+  }),
+  components:{Popup}
   // methods: ()
 };
 </script>

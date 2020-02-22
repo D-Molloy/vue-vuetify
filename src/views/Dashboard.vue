@@ -5,7 +5,7 @@
       <v-row class="mb-3 pl-2">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn small outlined color="grey" v-on="on" @click="sortBy('title')">
+            <v-btn small outlined color="grey" class="ma-2" v-on="on" @click="sortBy('title')">
               <v-icon left small color="grey">mdi-folder</v-icon>
               <span class="grey--text caption text-lowercase">Order By Project</span>
             </v-btn>
@@ -15,7 +15,7 @@
 
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn small outlined color="grey" v-on="on" @click="sortBy('person')">
+            <v-btn small outlined color="grey" class="ma-2" v-on="on"  @click="sortBy('person')">
               <v-icon left small color="grey">mdi-account-group</v-icon>
               <span class="grey--text caption text-lowercase">Order By Person</span>
             </v-btn>
