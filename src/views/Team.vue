@@ -1,6 +1,6 @@
 <template>
   <div class="team">
-    <h1 class="title grey--text">Team</h1>
+    <h1 class="subheading grey--text py-3">Team</h1>
     <v-container class="my-5">
       <v-row>
         <v-col cols="12" xs="12" sm="6" md="4" lg="3" v-for="person in team" :key="person.name">

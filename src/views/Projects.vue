@@ -1,6 +1,6 @@
 <template>
   <div class="projects">
-    <h1 class="subheading grey--text py-5">Projects</h1>
+    <h1 class="subheading grey--text py-3">Projects</h1>
 
     <v-expansion-panels>
       <v-expansion-panel v-for="(project, i) in myProjects" :key="i">

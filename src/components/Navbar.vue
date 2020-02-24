@@ -1,5 +1,22 @@
 <template>
   <nav>
+ 
+ 
+    <v-snackbar
+      v-model="snackbar"
+      top
+    >
+      Project created!
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+
+
     <v-app-bar flat app>
       <v-app-bar-nav-icon class="grey--text" @click="drawerOpen = !drawerOpen"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
@@ -42,7 +59,7 @@
         <p class="white--text subtitle-1">The Net Ninja</p>
       </v-col>
       <v-col >
-      <Popup/>
+      <Popup @projectCreated="snackbar=true"/>
       </v-col>
       <v-list>
         <!-- router prop  -->
@@ -70,6 +87,7 @@ export default {
   name: "Navbar",
   data: () => ({
     drawerOpen: false,
+    snackbar:false,
     links: [
       { icon: "mdi-view-dashboard", text: "Dashboard", route: "/" },
       { icon: "mdi-folder", text: "My Projects", route: "/projects" },

@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-dialog width="500">
+    <v-dialog width="500" v-model="dialog">
       <template v-slot:activator="{ on }">
         <v-btn class="success" dark v-on="on">
           <v-icon>mdi-sticker-plus-outline</v-icon>
@@ -51,6 +51,7 @@
                 class="success mx-0 mt-2"
                 @click="submit"
                 :disabled="!title || !description"
+                :loading="loading"
                 >Create Project</v-btn
               >
             </div>
@@ -71,17 +72,21 @@ export default {
     due: '',
     modal: false,
     status: "ongoing",
-    inputRules: [v => v.length >= 3 || 'Please complete the form.']
+    inputRules: [v => v.length >= 3 || 'Please complete the form.'],
+    loading: false,
+    dialog: false
   }),
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
         const newProject = {
           title: this.title,
           description: this.description,
           due: this.due,
           person: 'Denis',
-          status:"ongoing"
+          status:"ongoing",
+          dialog: false
         };
 
         db.collection('projects')
@@ -91,7 +96,9 @@ export default {
             this.title = '';
             this.description = '';
             this.due = '';
-            this.modal=false;
+            this.dialog=false
+            this.loading=false
+            this.$emit('projectCreated')
           })
           .catch(err => console.log(err));
       }
@@ -99,3 +106,42 @@ export default {
   }
 };
 </script>
+
+
+<style>
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
