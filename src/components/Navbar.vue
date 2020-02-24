@@ -20,7 +20,7 @@
     <v-app-bar flat app>
       <v-app-bar-nav-icon class="grey--text" @click="drawerOpen = !drawerOpen"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
-        <span>Denny</span>
+        <span>Slark</span>
         <span class="font-weight-light">Todo</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
