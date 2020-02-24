@@ -1,16 +1,33 @@
 <template>
   <nav>
+ 
+ 
+    <v-snackbar
+      v-model="snackbar"
+      top
+    >
+      Project created!
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+
+
     <v-app-bar flat app>
       <v-app-bar-nav-icon class="grey--text" @click="drawerOpen = !drawerOpen"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
-        <span>Denny</span>
+        <span>Slark</span>
         <span class="font-weight-light">Todo</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- dropdown menu -->
       <v-menu offset-y>
         <template v-slot:activator="{ on: menu }">
-          <v-btn color="grey" outlined v-on="{ ...tooltip, ...menu }">
+          <v-btn color="grey" outlined v-on="{...menu }">
             <v-icon color="grey" left>mdi-menu-swap-outline</v-icon>
             <span>Menu</span>
           </v-btn>
@@ -41,6 +58,9 @@
         </v-avatar>
         <p class="white--text subtitle-1">The Net Ninja</p>
       </v-col>
+      <v-col >
+      <Popup @projectCreated="snackbar=true"/>
+      </v-col>
       <v-list>
         <!-- router prop  -->
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route" flat>
@@ -61,10 +81,13 @@
 </template>
 
 <script>
+import Popup from "./Popup"
+
 export default {
   name: "Navbar",
   data: () => ({
     drawerOpen: false,
+    snackbar:false,
     links: [
       { icon: "mdi-view-dashboard", text: "Dashboard", route: "/" },
       { icon: "mdi-folder", text: "My Projects", route: "/projects" },
@@ -76,7 +99,8 @@ export default {
       { title: "Click Me3" },
       { title: "Click Me4" }
     ]
-  })
+  }),
+  components:{Popup}
   // methods: ()
 };
 </script>

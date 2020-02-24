@@ -1,11 +1,11 @@
 <template>
   <div class="dashboard">
-    <h1 class="title grey--text">Dashboard</h1>
+    <h1 class="subheading grey--text py-3">Dashboard</h1>
     <v-container class="my-5">
       <v-row class="mb-3 pl-2">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn small outlined color="grey" v-on="on" @click="sortBy('title')">
+            <v-btn small outlined color="grey" class="ma-2" v-on="on" @click="sortBy('title')">
               <v-icon left small color="grey">mdi-folder</v-icon>
               <span class="grey--text caption text-lowercase">Order By Project</span>
             </v-btn>
@@ -15,7 +15,7 @@
 
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn small outlined color="grey" v-on="on" @click="sortBy('person')">
+            <v-btn small outlined color="grey" class="ma-2" v-on="on"  @click="sortBy('person')">
               <v-icon left small color="grey">mdi-account-group</v-icon>
               <span class="grey--text caption text-lowercase">Order By Person</span>
             </v-btn>
@@ -53,49 +53,33 @@
 
 <script>
 // @ is an alias to /src
+import db from '@/firebase'
+
 export default {
   name: "Dashboard",
   data: () => ({
-    projects: [
-      {
-        title: "Design a new website",
-        person: "The Net Ninja",
-        due: "1st Jan 2019",
-        status: "ongoing",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-      },
-      {
-        title: "Code up the homepage",
-        person: "Chun Li",
-        due: "10th Jan 2019",
-        status: "complete",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-      },
-      {
-        title: "Design video thumbnails",
-        person: "Ryu",
-        due: "20th Dec 2018",
-        status: "complete",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-      },
-      {
-        title: "Create a community forum",
-        person: "Gouken",
-        due: "20th Oct 2018",
-        status: "overdue",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-      }
-    ]
+    projects: []
   }),
   methods: {
     sortBy(prop) {
       this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
     }
-  }
+  },
+  created() {
+    db.collection('projects').onSnapshot(res=>{
+      const changes = res.docChanges();
+
+      changes.forEach(change=>{
+        if(change.type === 'added'){
+          console.log(change.doc.data())
+          this.projects.push({
+            ...change.doc.data(),
+            id: change.doc.id
+          })
+        }
+      })
+    })
+  },  
 };
 </script>
 
