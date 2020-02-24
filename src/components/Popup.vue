@@ -26,12 +26,7 @@
               v-model="description"
             ></v-textarea>
 
-            <v-dialog
-              ref="dialog"
-              v-model="modal"
-              persistent
-              width="290px"
-            >
+            <v-dialog ref="dialog" v-model="modal" persistent width="290px">
               <template v-slot:activator="{ on }">
                 <v-text-field
                   v-model="due"
@@ -47,9 +42,7 @@
                 <v-btn text color="primary" @click="modal = false"
                   >Cancel</v-btn
                 >
-                <v-btn text color="primary" @click="modal = false"
-                  >OK</v-btn
-                >
+                <v-btn text color="primary" @click="modal = false">OK</v-btn>
               </v-date-picker>
             </v-dialog>
 
@@ -69,22 +62,39 @@
 </template>
 
 <script>
+import db from '@/firebase';
+
 export default {
   data: () => ({
     title: '',
     description: '',
-    due: "",
+    due: '',
     modal: false,
-    inputRules:[
-      v => v.length >=3 || "Please complete the form." 
-    ]
+    status: "ongoing",
+    inputRules: [v => v.length >= 3 || 'Please complete the form.']
   }),
   methods: {
     submit() {
-      // if(this.$refs.form.validate()){
+      if (this.$refs.form.validate()) {
+        const newProject = {
+          title: this.title,
+          description: this.description,
+          due: this.due,
+          person: 'Denis',
+          status:"ongoing"
+        };
 
-      console.log(this.title, this.description, this.due);
-      // }
+        db.collection('projects')
+          .add(newProject)
+          .then(() => {
+            console.log('Added to db');
+            this.title = '';
+            this.description = '';
+            this.due = '';
+            this.modal=false;
+          })
+          .catch(err => console.log(err));
+      }
     }
   }
 };
